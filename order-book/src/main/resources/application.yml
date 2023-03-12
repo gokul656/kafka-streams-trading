@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: order-book
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/order_book?createDatabaseIfNotExist=true
+    username: terareum
+    password: Terareum@2023
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    generate-dll: true
+    hibernate:
+      ddl-auto: update
+
+  cloud:
+    function:
+      definition: orderBuySupplier;orderSellSupplier;transactionConsumer;
+    stream:
+      bindings:
+        orderBuySupplier-out-0:
+          destination: orders.buy
+        orderSellSupplier-out-0:
+          destination: orders.sell
+        transactionConsumer-in-0:
+          destination: transactions
+        kafka.streams.binder.functions.orders.applicationId: txns
+
+  kafka:
+    streams.properties.trusted.packages: "com.malware.matchingengine.model.*"
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      spring:
+        json:
+          trusted:
+            packages: "com.malware.*"
+
+
+    binder:
+      brokers: localhost:9092
