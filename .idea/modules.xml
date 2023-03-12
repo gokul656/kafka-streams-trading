@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/kakfa-streams-demo.iml" filepath="$PROJECT_DIR$/.idea/kakfa-streams-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/matching-engine/matching-engine.iml" filepath="$PROJECT_DIR$/matching-engine/matching-engine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order-book/order-book.iml" filepath="$PROJECT_DIR$/order-book/order-book.iml" />
+    </modules>
+  </component>
+</project>

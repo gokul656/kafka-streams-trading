@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/order_book?createDatabaseIfNotExist=true
+    username: terareum
+    password: Terareum@2023
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    generate-dll: true
+    hibernate:
+      ddl-auto: update
+
+  cloud:
+    function:
+      definition: orders;
+    stream:
+      kafka.streams.binder.functions.orders.applicationId: orders
+      bindings.orders-in-0.destination: orders.buy
+      bindings.orders-in-1.destination: orders.sell
+      bindings.orders-out-0.destination: transactions
+
+  kafka.producer.properties.spring.json.add.type.headers: false
